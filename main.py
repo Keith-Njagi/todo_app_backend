@@ -46,7 +46,6 @@ class Todo(Resource):
         task = list(get_item)
         if len(task) == 0:
             return{'message':'Todo item does not exist'}, 404
-        
         return task[0], 200
     
     @api.expect(todos_model)
@@ -67,8 +66,3 @@ class Todo(Resource):
                 todos_db.pop(i)
                 return{'message':'Todo Item deleted'}, 200
                 print(todos_db)
-        
-
-
-if __name__ == "__main__":
-    app.run()

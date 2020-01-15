@@ -18,14 +18,32 @@ class Todo(db.Model):
         return self
 
     @classmethod
-    def fetch_by_id(cls, id):
-        return cls.query.filter_by(id=id).first()
-
-    @classmethod
     def fetch_all(cls):
         return cls.query.order_by(cls.id.desc()).all()
 
-    
+    @classmethod
+    def fetch_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
+
+    @classmethod #TODO: read on keyword functions & default functions
+    def update_todo(cls, id, title=None, description=None, updated=None): #update
+        record = cls.fetch_by_id(id)
+        if title:
+            record.title = title
+        if description:
+            record.description = description
+        if updated:
+            record.updated = updated
+
+        db.session.commit()
+        return True
+
+    @classmethod
+    def delete_by_id(cls, id):
+        record = cls.query.filter_by(id=id)
+        record.delete()
+        db.session.commit()
+        return True
 
 class TodoSchema(ma.Schema):
     class Meta:
