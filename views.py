@@ -57,6 +57,7 @@ class TodoList(Resource):
 class TodoItem(Resource):
     @api.doc('get_todo', responses={ 200: 'OK', 400: 'Invalid Argument', 404: 'Not Found', 500: 'Mapping Key Error' })
     def get(self, id):
+        '''Get todo item from database'''
         try:
             my_todo = Todo.fetch_by_id(id)
             todo = todo_schema.dump(my_todo)
