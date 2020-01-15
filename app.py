@@ -11,7 +11,7 @@ api = Api(blueprint, doc='/documentation', title='Todos API', version='1.0', des
 
 app.register_blueprint(blueprint)
 
-app.config.from_object(Development)
+app.config.from_object(Production)
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
